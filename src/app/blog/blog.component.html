@@ -1,0 +1,33 @@
+
+<h2>Simple Blog</h2>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>
+      Name
+      <br>
+      <input type="text" formControlName="name">
+    </label>
+  </div>
+  <div *ngIf="postForm.get('name').invalid && postForm.get('name').touched" style="color: red">
+    Name is required and minlength is 10
+  </div>
+  <div>
+    <label>
+      Content
+      <br>
+     <textarea formControlName="content" cols="30" rows="10"></textarea>
+    </label>
+  </div>
+  <div *ngIf="postForm.get('content').invalid && postForm.get('content').touched" style="color: red">
+    Content is required and minlength is 10
+  </div>
+  <button type="submit">Submit</button>
+</form>
+<ul>
+  <li *ngFor="let post of postList; index as i">
+    <a [routerLink]="['/blog',post.id]"><h3>{{post.name}}-{{post.content}}</h3></a>
+    <a [routerLink]="['/blog',post.id,'edit']">Edit</a>
+    <br>
+    <button (click)="delete(i)">Delete</button>
+  </li>
+</ul>

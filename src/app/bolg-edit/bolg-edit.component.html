@@ -1,0 +1,24 @@
+<h2>Blog Detail</h2>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit">
+  <div>
+    <label>
+      Name
+      <br>
+      <input type="text" formControlName="name">
+    </label>
+  </div>
+  <div *ngIf="postForm.get('name').invalid && postForm.get('name').touched">
+    Name is required and minlength is 2
+  </div>
+  <div>
+    <label>
+      Content
+      <br>
+      <input type="text" formControlName="content">
+    </label>
+  </div>
+  <div *ngIf="postForm.get('content').invalid && postForm.get('content').touched">
+    Content is required and minlength is 2
+  </div>
+  <button (click)="onSubmit()">Submit</button>
+</form>
