@@ -1,33 +1,45 @@
-
-<h2>Simple Blog</h2>
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>
-      Name
-      <br>
-      <input type="text" formControlName="name">
-    </label>
+<style>
+  .table a:hover {
+    color: red;
+  }
+</style>
+<h2 class="text-center">Blog Cá Nhân</h2>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Tiêu Đề</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
   </div>
   <div *ngIf="postForm.get('name').invalid && postForm.get('name').touched" style="color: red">
-    Name is required and minlength is 10
+    Phần tiêu đề không được để trống và có chiều dài tối thiểu là 2
   </div>
-  <div>
-    <label>
-      Content
-      <br>
-     <textarea formControlName="content" cols="30" rows="10"></textarea>
-    </label>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Nội Dung</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="content"></textarea>
   </div>
   <div *ngIf="postForm.get('content').invalid && postForm.get('content').touched" style="color: red">
-    Content is required and minlength is 10
+    Phần nội dung không được để trống và có chiều dài tối thiểu là 2
   </div>
-  <button type="submit">Submit</button>
+  <input class="btn btn-primary" type="submit" value="Tạo mới Blog">
 </form>
-<ul>
-  <li *ngFor="let post of postList; index as i">
-    <a [routerLink]="['/blog',post.id]"><h3>{{post.name}}-{{post.content}}</h3></a>
-    <a [routerLink]="['/blog',post.id,'edit']">Edit</a>
-    <br>
-    <button (click)="delete(i)">Delete</button>
-  </li>
-</ul>
+<br>
+<table class="table table-striped col-md-10 offset-md-1">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Tiêu Đề</th>
+    <th scope="col">Nội Dung</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let post of postList; index as i">
+    <th scope="row">1</th>
+    <td>{{post.name}}</td>
+    <td>{{post.content}}</td>
+    <td><a [routerLink]="['/blog',post.id,'edit']">Chỉnh Sửa</a></td>
+    <td><a (click)="delete(i)">Xóa</a></td>
+  </tr>
+  </tbody>
+</table>
+

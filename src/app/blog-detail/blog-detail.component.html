@@ -1,4 +1,4 @@
-<div *ngIf="post; else nothing">
+<div *ngIf="post; else nothing" class="text-center">
   <h4>
     {{post.name}}
   </h4>
@@ -9,3 +9,5 @@
 <ng-template #nothing>
   <p>Nothing to show</p>
 </ng-template>
+
+
